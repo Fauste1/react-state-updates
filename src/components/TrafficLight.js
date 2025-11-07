@@ -5,7 +5,8 @@
  * clicking the button should say “Stop is next”. 
  * When the light is red and says “Stop”, clicking the button should say “Walk is next”.
  * 
- * Does it make a difference whether you put the alert before or after the setWalk call?
+ * Q: Does it make a difference whether you put the alert before or after the setWalk call?
+ * A: No because the alert gets the state value from the current render, which is constant no matter when we call the setter
  * 
  */
 
@@ -17,6 +18,7 @@ export default function TrafficLight() {
 
   function handleClick() {
     setWalk(!walk);
+    alert(walk ? 'Stop is next' : 'Walk is next');
   }
 
   return (
