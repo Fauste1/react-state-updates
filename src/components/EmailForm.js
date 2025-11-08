@@ -1,11 +1,15 @@
 
+// todo, update the object to be nested, refactor the components and the handleChange function to work with this new setup
+
 import { useState } from "react";
 
 export default function EmailForm() {
     
     const [person, setPerson] = useState({
-        firstName: '',
-        lastName: '',
+        initials: {
+            firstName: '',
+            lastName: '',
+        },
         companyName: '',
     });
     
@@ -13,6 +17,16 @@ export default function EmailForm() {
         setPerson({
             ...person,
             [e.target.name]: e.target.value
+        })
+    }
+    
+    function handleInitialsChange(e) {
+        setPerson({
+            ...person,
+            initials: {
+                ...person.initials,
+                [e.target.name]: e.target.value
+            }
         })
     }
 
@@ -29,21 +43,21 @@ export default function EmailForm() {
                         display: "block",
                         margin: 10
                     }}
-                    onChange={handleChange}
-                    value={person.firstName}
+                    onChange={handleInitialsChange}
+                    value={person.initials.firstName}
                 />
                 <label htmlFor="lastName">Last Name</label>
                 <input 
                     type="text"
                     name="lastName"
-                    value={person.lastName}
+                    value={person.initials.lastName}
                     placeholder="Doe"
                     id="lastName" 
                     style={{
                         display: "block",
                         margin: 10
                     }} 
-                    onChange={handleChange}  
+                    onChange={handleInitialsChange}  
                 />
                 <label htmlFor="companyName">Company</label>
                 <input 
@@ -59,8 +73,8 @@ export default function EmailForm() {
                     onChange={handleChange}  
                 />
             </form>
-            {person.companyName && <p>Your email is { person.firstName.toLowerCase() + '.' + person.lastName.toLowerCase() + '@' + person.companyName.toLowerCase()}.com</p>}
-            <button onClick={() => setPerson({firstName: '', lastName: '', companyName: ''})}>Reset</button>
+            {person.companyName && <p>Your email is { person.initials.firstName.toLowerCase() + '.' + person.initials.lastName.toLowerCase() + '@' + person.companyName.toLowerCase()}.com</p>}
+            <button onClick={() => setPerson({initials:{ firstName: '', lastName: '' }, companyName: ''})}>Reset</button>
         </>
     );
 }
