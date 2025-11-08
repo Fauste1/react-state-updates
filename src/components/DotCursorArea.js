@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 
-export default function RedDotCursor() {
+export default function DotCursorArea() {
 
     const [position, setPosition] = useState({ x: 0, y: 0});
 
@@ -17,18 +17,24 @@ export default function RedDotCursor() {
                 setPosition({ x: e.clientX, y: e.clientY })
         }}>
 
-            <div 
+            <DotCursor cursorPosition={ position } />
+        </div>
+    );
+
+}
+
+function DotCursor( { cursorPosition } ) {
+    return(
+        <div 
                 style={{
                     position: 'absolute',
                     backgroundColor: 'red',
                     borderRadius: '50%',
-                    transform: `translate(${position.x}px, ${position.y}px)`,
+                    transform: `translate(${cursorPosition.x}px, ${cursorPosition.y}px)`,
                     left: -20,
                     top: -20,
                     width: 20,
                     height: 20,
             }} />
-        </div>
     );
-
 }
